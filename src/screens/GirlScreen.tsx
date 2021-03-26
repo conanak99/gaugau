@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { Header, Input, Button } from 'react-native-elements'
+import { sendPushNotification, getToken, Token } from '../services/api'
 
 const Page = styled(View)`
   padding: 40px 30px 0 30px;
@@ -43,34 +44,85 @@ const SummonButtonText = styled(Text)`
 `
 
 const GirlScreen: React.FC = () => {
+  const [tokenInput, setTokenInput] = React.useState('')
+  const [token, setToken] = React.useState<Token | undefined>()
+
+  const getTokenFromId = async (tokenId: string) => {
+    const storedToken = await getToken(tokenId)
+    setToken(storedToken)
+  }
+
   return (
     <>
       <Header centerComponent={{ text: 'Cho bạn nữ 👧', style: { color: '#fff' } }} />
 
       <Page>
-        <View>
-          <Input label="Mã số gấu 👦" placeholder="Nhập mã số của gấu đực vào đây" />
-          <Button title="Xác nhận mã số" />
-        </View>
+        {token ? (
+          <View>
+            <Heading>Mã số của gấu bạn là {token.id}.</Heading>
+            <Heading>Có thể triệu hồi gấu!</Heading>
+            <Button title="Nhập mã số mới!" onPress={() => setToken(undefined)} type="outline" />
+          </View>
+        ) : (
+          <View>
+            <Input
+              label="Mã số gấu 👦"
+              value={tokenInput}
+              onChangeText={setTokenInput}
+              placeholder="Nhập mã số của gấu đực vào đây"
+            />
+            <Button title="Xác nhận mã số" onPress={() => getTokenFromId(tokenInput)} />
+          </View>
+        )}
 
-        <ActionContainer>
-          <Heading>Triệu hồi gấu 👦</Heading>
+        {token && (
+          <ActionContainer>
+            <Heading>Triệu hồi gấu 👦</Heading>
 
-          <ButtonContainer>
-            <SummonButton color="#e74c3c">
-              <SummonButtonText>🍱Em đói quá</SummonButtonText>
-            </SummonButton>
-            <SummonButton color="#2980b9">
-              <SummonButtonText>🧋Thèm trà sữa</SummonButtonText>
-            </SummonButton>
-            <SummonButton color="#2ecc71">
-              <SummonButtonText>😢Nhớ anh quá</SummonButtonText>
-            </SummonButton>
-            <SummonButton color="#f1c40f">
-              <SummonButtonText>📱Gọi e nha</SummonButtonText>
-            </SummonButton>
-          </ButtonContainer>
-        </ActionContainer>
+            <ButtonContainer>
+              <SummonButton
+                color="#e74c3c"
+                onPress={() =>
+                  sendPushNotification(
+                    token.token,
+                    '🍱 Em đói quá',
+                    'Qua chở em đi ăn đi em đói quá 😞.'
+                  )
+                }>
+                <SummonButtonText>🍱Em đói quá</SummonButtonText>
+              </SummonButton>
+              <SummonButton
+                color="#2980b9"
+                onPress={() =>
+                  sendPushNotification(
+                    token.token,
+                    '🧋 Thèm trà sữa',
+                    'Huhu em thèm Phúc Long Gong Cha 😞'
+                  )
+                }>
+                <SummonButtonText>🥤Thèm trà sữa</SummonButtonText>
+              </SummonButton>
+              <SummonButton
+                color="#2ecc71"
+                onPress={() =>
+                  sendPushNotification(token.token, '😢 Nhớ anh quá', 'Nhớ anh ghê ahuhu 😞!')
+                }>
+                <SummonButtonText>😢Nhớ anh quá</SummonButtonText>
+              </SummonButton>
+              <SummonButton
+                color="#f1c40f"
+                onPress={() =>
+                  sendPushNotification(
+                    token.token,
+                    '📱 Gọi e nha',
+                    'Sao qua giờ không gọi, không nhớ e à 😤!'
+                  )
+                }>
+                <SummonButtonText>📱Gọi e nha</SummonButtonText>
+              </SummonButton>
+            </ButtonContainer>
+          </ActionContainer>
+        )}
       </Page>
     </>
   )
