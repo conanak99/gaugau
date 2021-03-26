@@ -25,6 +25,7 @@ module.exports = {
       {
         singleQuote: true,
         arrowParens: 'avoid',
+        semi: false,
         endOfLine: 'auto',
         printWidth: 100,
         tabWidth: 2,
