@@ -59,8 +59,8 @@ const GirlScreen: React.FC = () => {
       <Page>
         {token ? (
           <View>
-            <Heading>Mã số của gấu bạn là {token.id}.</Heading>
-            <Heading>Có thể triệu hồi gấu!</Heading>
+            <Heading>Mã số của gấu đực là {token.id}.</Heading>
+            <Heading>Có thể triệu hồi gấu 👦!</Heading>
             <Button title="Nhập mã số mới!" onPress={() => setToken(undefined)} type="outline" />
           </View>
         ) : (
@@ -69,7 +69,7 @@ const GirlScreen: React.FC = () => {
               label="Mã số gấu 👦"
               value={tokenInput}
               onChangeText={setTokenInput}
-              placeholder="Nhập mã số của gấu đực vào đây"
+              placeholder="Nhập mã số của gấu đực vào đây!"
             />
             <Button title="Xác nhận mã số" onPress={() => getTokenFromId(tokenInput)} />
           </View>
