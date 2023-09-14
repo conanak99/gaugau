@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "gau-gau",
-    "slug": "gau-gau",
+    "name": "First App",
+    "slug": "First-App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

@@ -33,7 +33,7 @@ const BoyScreen: React.FC = () => {
   return (
     <View>
       <Header
-        centerComponent={{ text: "Cho bạn nam 💆", style: { color: "#fff" } }}
+        centerComponent={{ text: "Màn hình bạn nam 💆", style: { color: "#fff" } }}
       />
       <Page>
         <Heading>{token ? `Mã số của bạn là ${token.id}` : `Bạn chưa có mã, bấm vào đây`}</Heading>

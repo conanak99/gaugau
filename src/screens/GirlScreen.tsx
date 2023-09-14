@@ -35,7 +35,7 @@ const GirlScreen: React.FC = () => {
   return (
     <View>
       <Header
-        centerComponent={{ text: "Cho bạn nữ  🤱", style: { color: "#fff" } }}
+        centerComponent={{ text: "Màn hình bạn nữ 🤱", style: { color: "#fff" } }}
       />
       <Page>
         {/* <Text>Cái</Text> */}
