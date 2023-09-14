@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["@types/babel__core"],
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
     "lib": ["dom", "esnext"],
